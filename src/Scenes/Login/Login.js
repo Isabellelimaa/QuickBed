@@ -1,32 +1,36 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, Alert} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {moderateScale} from 'react-native-size-matters';
+import ButtonStyled from '../../Components/ButtonStyled';
+import {LinearTextGradient} from 'react-native-text-gradient';
+import {Actions} from 'react-native-router-flux';
 
 const Login = () => {
   return (
     <View style={styles.container}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.grid}>
         <Image
           source={require('../../Assets/Logo.png')}
           resizeMode={'center'}
         />
       </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.grid}>
         <Image
           source={require('../../Assets/Signin.png')}
           resizeMode={'center'}
         />
       </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: moderateScale(26, 0.6), fontWeight: '700'}}>
-            Seja Bem-Vindo!
-          </Text>
-        </View>
+      <View style={styles.grid}>
+        <LinearTextGradient
+          style={{fontWeight: '700', fontSize: 25}}
+          locations={[0, 1]}
+          colors={['#00BCD4', '#3D0B83']}>
+          <Text>Seja bem-vindo!</Text>
+        </LinearTextGradient>
         <View
           style={{
             width: wp(65),
@@ -34,15 +38,11 @@ const Login = () => {
             alignItems: 'center',
             marginTop: hp(1),
           }}>
-          <Text
-            style={{
-              color: '#8F8F8F',
-              fontSize: moderateScale(14, 0.6),
-              fontWeight: '400',
-              textAlign: 'center',
-            }}>
+          <Text style={styles.text}>
             Procure leitos para seus pacientes de maneira fácil e rápida!
           </Text>
+          <ButtonStyled onTouchEnd={() => Actions.Cadastro({form: 'login'})} />
+          <Text style={styles.text}>JÁ TEM UMA CONTA? CONECTE-SE</Text>
         </View>
       </View>
     </View>
@@ -52,6 +52,17 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  grid: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: '#8F8F8F',
+    fontSize: moderateScale(14, 0.6),
+    fontWeight: '400',
+    textAlign: 'center',
   },
 });
 
