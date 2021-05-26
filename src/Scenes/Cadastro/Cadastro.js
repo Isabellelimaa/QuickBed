@@ -3,6 +3,8 @@ import {View, StyleSheet, Text, ImageBackground, Image} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import ButtonStyled from '../../Components/ButtonStyled';
 import CadastroUsuario from '../../Components/CadastroUsuario';
+import Step from '../../Components/Step';
+
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -10,46 +12,40 @@ import {
 
 const Cadastro = props => {
   const [form, setForm] = useState(props.form);
+  let nextForm;
 
   const renderCadastro = form => {
     if (form == 'login') {
+      nextForm = 'hospital';
       return <CadastroUsuario />;
     } else if (form == 'hospital') {
+      nextForm = 'endereco';
       return <Text>Hospital</Text>;
     } else if (form == 'endereco') {
+      onTouchEnd = Actions.Cadastro({form: 'login'});
       return <Text>Endereco</Text>;
     }
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../Assets/Vector.png')}
-        style={styles.image}>
-        <Image
-          style={styles.logo}
-          source={require('../../Assets/LogoWhite.png')}
-          resizeMode={'center'}
-        />
-        <Text style={styles.text}>
-          Atenção, para se cadastrar, você tem que preencher alguns itens
-          importantes
-        </Text>
-      </ImageBackground>
-      <View style={styles.grid}>{renderCadastro(form)}</View>
-      <View style={styles.grid}>
-        <View
-          style={{
-            width: wp(65),
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: hp(1),
-          }}>
-          <ButtonStyled onTouchEnd={() => setForm('hospital')} />
-          <Text style={styles.text}>JÁ TEM UMA CONTA? CONECTE-SE</Text>
+    <>
+      <Step step={1} />
+      <View style={styles.container}>
+        <View style={styles.grid}>{renderCadastro(form)}</View>
+        <View style={styles.grid}>
+          <View
+            style={{
+              width: wp(65),
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: hp(1),
+            }}>
+            <ButtonStyled onTouchEnd={() => setForm(nextForm)} />
+            <Text style={styles.text}>JÁ TEM UMA CONTA? CONECTE-SE</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -70,13 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    marginLeft: moderateScale(20, 0.6),
-    marginRight: moderateScale(20, 0.6),
-    color: '#FFFFFF',
-    fontSize: moderateScale(15, 0.6),
-    textAlign: 'center',
   },
 });
 

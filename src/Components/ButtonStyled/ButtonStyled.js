@@ -1,9 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Text, Alert} from 'react-native';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {StyleSheet, Text, Alert} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 
