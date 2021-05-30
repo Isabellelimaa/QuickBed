@@ -11,6 +11,7 @@ const InputStyled = props => {
         onChangeText={props.onChangeText}
         value={props.value}
         keyboardType={props.type}
+        secureTextEntry={props.secureTextEntry}
       />
     </>
   );
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     width: moderateScale(300, 0.6),
     color: '#999',
+    fontSize: moderateScale(12, 0.6),
   },
   input: {
     width: moderateScale(300, 0.6),

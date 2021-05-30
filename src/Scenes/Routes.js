@@ -3,8 +3,10 @@ import {View, StyleSheet} from 'react-native';
 import {Scene, Router} from 'react-native-router-flux';
 import {useDispatch, useSelector} from 'react-redux';
 
-import Login from './Login';
+import Welcome from './Welcome';
 import Cadastro from './Cadastro';
+import Login from './Login';
+import Home from './Home';
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -17,8 +19,10 @@ const Routes = () => {
           {/* {firstAppStore && (
             <Scene key="Intro" component={Intro} hideNavBar initial />
           )} */}
-          <Scene key="Login" component={Login} hideNavBar initial />
+          <Scene key="Welcome" component={Welcome} hideNavBar initial />
           <Scene key="Cadastro" component={Cadastro} hideNavBar />
+          <Scene key="Login" component={Login} hideNavBar />
+          <Scene key="Home" component={Home} hideNavBar />
         </Scene>
       </Router>
     </View>
