@@ -3,35 +3,34 @@ import {View, StyleSheet, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
 
-import Rodape from '../../Components/Rodape';
-import CadastroUsuario from '../../Components/CadastroUsuario';
-import CadastroHospital from '../../Components/CadastroHospital';
-import CadastroReferencia from '../../Components/CadastroReferencia';
 import Step from '../../Components/Step';
+import SolicitacaoPaciente from '../../Components/SolicitacaoPaciente';
+import SolicitacaoDetalhes from '../../Components/SolicitacaoDetalhes';
+import Rodape from '../../Components/Rodape';
 
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-const Cadastro = props => {
-  const [form, setForm] = useState(props.form);
+const NovaSolicitacao = props => {
+  const [form, setForm] = useState('paciente');
   let nextForm;
 
   const renderCadastro = form => {
-    if (form == 'login') {
-      nextForm = 'hospital';
-      return <CadastroUsuario />;
-    } else if (form == 'hospital') {
-      nextForm = 'referencia';
-      return <CadastroHospital />;
-    } else if (form == 'referencia') {
+    if (form == 'paciente') {
+      nextForm = 'detalhes';
+      return <SolicitacaoPaciente />;
+    } else if (form == 'detalhes') {
+      nextForm = 'leito';
+      return <SolicitacaoDetalhes />;
+    } else if (form == 'leito') {
       return <CadastroReferencia />;
     }
   };
 
   const onTouchEnd = nextForm => {
-    if (form == 'referencia') {
+    if (form == 'leito') {
       Actions.Welcome();
     } else {
       setForm(nextForm);
@@ -39,9 +38,9 @@ const Cadastro = props => {
   };
 
   const stepsTitles = {
-    1: 'Login',
-    2: 'Dados do Hospital',
-    3: 'Referência',
+    1: 'Dados do paciente',
+    2: 'Detalhes',
+    3: 'Leito',
   };
 
   return (
@@ -50,11 +49,7 @@ const Cadastro = props => {
       <View style={styles.container}>
         <View style={styles.grid}>{renderCadastro(form)}</View>
         <View style={styles.grid}>
-          <Rodape
-            onTouchEnd={() => onTouchEnd(nextForm)}
-            label={'Cadastrar'}
-            text={'JÁ TEM UMA CONTA? CONECTE-SE'}
-          />
+          <Rodape onTouchEnd={() => onTouchEnd(nextForm)} label={'Continuar'} />
         </View>
       </View>
     </>
@@ -81,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cadastro;
+export default NovaSolicitacao;

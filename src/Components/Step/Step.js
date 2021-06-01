@@ -17,8 +17,7 @@ const Step = props => {
           resizeMode={'center'}
         />
         <Text style={styles.text}>
-          Atenção, para se cadastrar, você tem que preencher alguns itens
-          importantes.
+          Atenção, você terá que preencher alguns itens importantes.
         </Text>
         <View style={styles.container}>
           <View style={styles.steps}>
@@ -28,7 +27,7 @@ const Step = props => {
               onTouchEnd={props.onTouchEnd}>
               <Text style={styles.textLinearGradient}>1</Text>
             </LinearGradient>
-            <Text style={styles.textStep}>Login</Text>
+            <Text style={styles.textStep}>{props.titles[1]}</Text>
           </View>
           <View style={styles.steps}>
             <LinearGradient
@@ -37,7 +36,7 @@ const Step = props => {
               onTouchEnd={props.onTouchEnd}>
               <Text style={styles.textLinearGradient}>2</Text>
             </LinearGradient>
-            <Text style={styles.textStep}>Hospital</Text>
+            <Text style={styles.textStep}>{props.titles[2]}</Text>
           </View>
           <View style={styles.steps}>
             <LinearGradient
@@ -46,7 +45,7 @@ const Step = props => {
               onTouchEnd={props.onTouchEnd}>
               <Text style={styles.textLinearGradient}>3</Text>
             </LinearGradient>
-            <Text style={styles.textStep}>Endereço</Text>
+            <Text style={styles.textStep}>{props.titles[3]}</Text>
           </View>
         </View>
       </ImageBackground>

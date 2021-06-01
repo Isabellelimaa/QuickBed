@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
-import {Scene, Router, Stack} from 'react-native-router-flux';
+import {Scene, Router, Stack, Actions} from 'react-native-router-flux';
 
 import Cadastro from '../../Scenes/Cadastro';
 import Login from '../../Scenes/Login';
+import NovaSolicitacao from '../../Scenes/NovaSolicitacao';
 
 const NavBar = () => {
   const SettingsTab = props => {
@@ -60,7 +61,7 @@ const NavBar = () => {
             />
             <Scene
               key="solicitar"
-              component={Solicitacao}
+              component={NovaSolicitacao}
               hideNavBar={true}
               icon={SettingsTab}
               title="Solicitar"

@@ -10,13 +10,20 @@ import {
 import ButtonStyled from '../ButtonStyled';
 
 const Rodape = props => {
+  const renderText = () => {
+    if (props.text)
+      return (
+        <Text style={styles.text} onPress={() => Actions.Login()}>
+          {props.text}
+        </Text>
+      );
+  };
+
   return (
     <>
       <View style={styles.container}>
         <ButtonStyled onTouchEnd={props.onTouchEnd} title={props.label} />
-        <Text style={styles.text} onPress={() => Actions.Login()}>
-          {props.text}
-        </Text>
+        {renderText()}
       </View>
     </>
   );
