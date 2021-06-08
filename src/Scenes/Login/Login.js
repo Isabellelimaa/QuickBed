@@ -15,44 +15,63 @@ const Login = () => {
   const [value, setValue] = useState(0);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.grid}>
+    <>
+      <ImageBackground
+        source={require('../../Assets/Vector.png')}
+        style={styles.image}>
+        <Image
+          style={styles.logo}
+          source={require('../../Assets/LogoWhite2.png')}
+          resizeMode={'contain'}
+        />
+      </ImageBackground>
+      <View style={styles.container}>
+        {/* <View style={styles.grid}>
         <LinearTextGradient
           style={{fontWeight: '700', fontSize: 25}}
           locations={[0, 1]}
           colors={['#00BCD4', '#3D0B83']}>
           <Text>Seja bem-vindo!</Text>
         </LinearTextGradient>
+      </View> */}
+        <View style={styles.grid}>
+          <InputStyled
+            label={'Login'}
+            onChangeText={() => console.log('teste')}
+            value={value}
+            type={'text'}
+          />
+          <InputStyled
+            label={'Senha'}
+            onChangeText={() => console.log('teste')}
+            value={value}
+            type={'password'}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.grid}>
+          <Rodape
+            onTouchEnd={() => Actions.Home()}
+            label={'Acessar'}
+            text={'NÃO POSSUI CONTA? CADASTRE-SE'}
+          />
+        </View>
       </View>
-      <View style={styles.grid}>
-        <InputStyled
-          label={'Login'}
-          onChangeText={() => console.log('teste')}
-          value={value}
-          type={'text'}
-        />
-        <InputStyled
-          label={'Senha'}
-          onChangeText={() => console.log('teste')}
-          value={value}
-          type={'password'}
-          secureTextEntry
-        />
-      </View>
-      <View style={styles.grid}>
-        <Rodape
-          onTouchEnd={() => Actions.Home()}
-          label={'Acessar'}
-          text={'NÃO POSSUI CONTA? CADASTRE-SE'}
-        />
-      </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    resizeMode: 'cover',
+  },
+  logo: {
+    marginBottom: moderateScale(10, 0.6),
+    width: '100%',
+    justifyContent: 'center',
   },
   grid: {
     flex: 1,

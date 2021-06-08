@@ -47,24 +47,19 @@ const Cadastro = props => {
   return (
     <>
       <Step step={1} titles={stepsTitles} />
-      <View style={styles.container}>
-        <View style={styles.grid}>{renderCadastro(form)}</View>
-        <View style={styles.grid}>
-          <Rodape
-            onTouchEnd={() => onTouchEnd(nextForm)}
-            label={'Cadastrar'}
-            text={'JÁ TEM UMA CONTA? CONECTE-SE'}
-          />
-        </View>
+      <View style={styles.cadastro}>{renderCadastro(form)}</View>
+      <View style={styles.rodape}>
+        <Rodape
+          onTouchEnd={() => onTouchEnd(nextForm)}
+          label={'Cadastrar'}
+          text={'JÁ TEM UMA CONTA? CONECTE-SE'}
+        />
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   image: {
     flex: 1,
     resizeMode: 'cover',
@@ -74,8 +69,13 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
   },
-  grid: {
-    flex: 1,
+  rodape: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cadastro: {
+    paddingTop: moderateScale(10, 0.6),
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

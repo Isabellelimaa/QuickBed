@@ -9,13 +9,11 @@ import NovaSolicitacao from '../../Scenes/NovaSolicitacao';
 
 const NavBar = () => {
   const SettingsTab = props => {
-    let textColor = props.focused ? '#333333' : '#999999';
-    const settingImageFocused = require('../../Assets/Icons/Message.png');
-    const settingImageUnfocused = require('../../Assets/Icons/Message.png');
+    const settingImageFocused = require('../../Assets/Icons/SettingsSelected.png');
+    const settingImageUnfocused = require('../../Assets/Icons/Settings.png');
     let settingImage = props.focused
       ? settingImageFocused
       : settingImageUnfocused;
-    let borderColor = props.focused ? '#333333' : '#FFFFFF';
     return (
       <View
         style={{
@@ -23,13 +21,90 @@ const NavBar = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          borderTopColor: borderColor,
-          borderTopWidth: 4,
           padding: 20,
           width: '100%',
         }}>
         <Image source={settingImage} style={{width: 20, height: 20}} />
-        <Text style={{color: textColor}}>Settings</Text>
+      </View>
+    );
+  };
+
+  const MessagesTab = props => {
+    const MessageImageFocused = require('../../Assets/Icons/MessageSelected.png');
+    const MessageImageUnfocused = require('../../Assets/Icons/Message.png');
+    let MessageImage = props.focused
+      ? MessageImageFocused
+      : MessageImageUnfocused;
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          width: '100%',
+        }}>
+        <Image source={MessageImage} style={{width: 20, height: 20}} />
+      </View>
+    );
+  };
+
+  const SearchTab = props => {
+    const SearchImageFocused = require('../../Assets/Icons/SearchSelected.png');
+    const SearchImageUnfocused = require('../../Assets/Icons/Search.png');
+    let SearchImage = props.focused ? SearchImageFocused : SearchImageUnfocused;
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          width: '100%',
+        }}>
+        <Image source={SearchImage} style={{width: 20, height: 20}} />
+      </View>
+    );
+  };
+
+  const HomeTab = props => {
+    const HomeImageFocused = require('../../Assets/Icons/HomeSelected.png');
+    const HomeImageUnfocused = require('../../Assets/Icons/Home.png');
+    let HomeImage = props.focused ? HomeImageFocused : HomeImageUnfocused;
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          width: '100%',
+        }}>
+        <Image source={HomeImage} style={{width: 20, height: 20}} />
+      </View>
+    );
+  };
+
+  const AddSolTab = props => {
+    const AddSolTabImageFocused = require('../../Assets/Icons/AddSelected.png');
+    const AddSolTabImageUnfocused = require('../../Assets/Icons/AddSelected.png');
+    let AddSolTabImage = props.focused
+      ? AddSolTabImageFocused
+      : AddSolTabImageUnfocused;
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          width: '100%',
+        }}>
+        <Image source={AddSolTabImage} style={{width: 20, height: 20}} />
       </View>
     );
   };
@@ -48,7 +123,7 @@ const NavBar = () => {
               key="home"
               component={Login}
               hideNavBar={true}
-              icon={SettingsTab}
+              icon={HomeTab}
               title="Home"
             />
             <Scene
@@ -56,21 +131,21 @@ const NavBar = () => {
               initial={true}
               component={Cadastro}
               hideNavBar={true}
-              icon={SettingsTab}
+              icon={SearchTab}
               title="Recebidas"
             />
             <Scene
               key="solicitar"
               component={NovaSolicitacao}
               hideNavBar={true}
-              icon={SettingsTab}
+              icon={AddSolTab}
               title="Solicitar"
             />
             <Scene
               key="notificacoes"
               component={Login}
               hideNavBar={true}
-              icon={SettingsTab}
+              icon={MessagesTab}
               title="Notificações"
             />
             <Scene
@@ -89,7 +164,7 @@ const NavBar = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    height: 50,
+    height: 60,
     borderTopColor: 'darkgrey',
     borderTopWidth: 1,
     opacity: 0.98,

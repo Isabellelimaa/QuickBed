@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: hp(1),
+    paddingBottom: moderateScale(8, 0.6),
   },
   text: {
     marginTop: moderateScale(8, 0.6),

@@ -13,8 +13,8 @@ const Step = props => {
         style={styles.image}>
         <Image
           style={styles.logo}
-          source={require('../../Assets/LogoWhite.png')}
-          resizeMode={'center'}
+          source={require('../../Assets/LogoWhite2.png')}
+          resizeMode={'contain'}
         />
         <Text style={styles.text}>
           Atenção, você terá que preencher alguns itens importantes.
@@ -55,17 +55,19 @@ const Step = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: moderateScale(15, 0.6),
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   image: {
-    flex: 1,
-    height: moderateScale(250, 0.6),
+    height: moderateScale(180, 0.6),
     resizeMode: 'cover',
     justifyContent: 'center',
+    textAlign: 'center',
   },
   logo: {
+    marginBottom: moderateScale(10, 0.6),
     width: '100%',
     justifyContent: 'center',
   },
@@ -83,7 +85,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   steps: {
-    flex: 1,
     alignItems: 'baseline',
     flexDirection: 'row',
   },
