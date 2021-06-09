@@ -6,6 +6,7 @@ import {Scene, Router, Stack, Actions} from 'react-native-router-flux';
 import Cadastro from '../../Scenes/Cadastro';
 import Login from '../../Scenes/Login';
 import NovaSolicitacao from '../../Scenes/NovaSolicitacao';
+import MinhasSolicitacoes from '../../Scenes/MinhasSolicitacoes';
 
 const NavBar = () => {
   const SettingsTab = props => {
@@ -143,7 +144,7 @@ const NavBar = () => {
             />
             <Scene
               key="notificacoes"
-              component={Login}
+              component={MinhasSolicitacoes}
               hideNavBar={true}
               icon={MessagesTab}
               title="Notificações"

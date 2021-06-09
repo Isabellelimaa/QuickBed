@@ -65,9 +65,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  image: {
-    resizeMode: 'cover',
-  },
   logo: {
     marginBottom: moderateScale(10, 0.6),
     width: '100%',
@@ -85,13 +82,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    flex: 1,
     height: moderateScale(250, 0.6),
     resizeMode: 'cover',
-    justifyContent: 'center',
-  },
-  logo: {
-    width: '100%',
     justifyContent: 'center',
   },
 });
