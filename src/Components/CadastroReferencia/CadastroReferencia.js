@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, ScrollView, Text} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {LinearTextGradient} from 'react-native-text-gradient';
 
@@ -61,7 +61,7 @@ const CadastroReferencia = ({data, handleChange}) => {
       </LinearTextGradient>
       <InputStyled
         label={'Leitos Disponíveis'}
-        onChangeText={value => props.handleChange('qtLeito', value, 'hospital')}
+        onChangeText={value => handleChange('qtLeito', value, 'hospital')}
         value={data.hospital.qtLeito}
         type={'numeric'}
       />
