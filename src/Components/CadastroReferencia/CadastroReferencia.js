@@ -1,24 +1,72 @@
-import React, {useState} from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, ScrollView, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
+import {LinearTextGradient} from 'react-native-text-gradient';
 
+import {API} from '../../Configs/AxiosConfigs';
 import InputStyled from '../InputStyled/InputStyled';
+import SelectStyled from '../SelectStyled/SelectStyled';
 
-const CadastroReferencia = props => {
-  const [value, setValue] = useState(0);
+const CadastroReferencia = ({data, handleChange}) => {
+  const [referencia, setReferencia] = useState([]);
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    API.get('hospital/list-referencia')
+      .then(response => {
+        setReferencia(response.data.resultado);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const renderReferencia = () => {
+    return new Array(count).fill(null).map((item, index) => {
+      console.log(`render: {${index}}`);
+      return (
+        <SelectStyled
+          label={'Referência'}
+          options={referencia}
+          value={
+            data.hospital.cdReferencia[index]
+              ? data.hospital.cdReferencia[index]
+              : null
+          }
+          onValueChange={value =>
+            handleChange('cdReferencia', value, 'hospital', index)
+          }
+          key={`${index}-ref`}
+        />
+      );
+    });
+  };
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {renderReferencia()}
+      <LinearTextGradient
+        style={{
+          fontWeight: '700',
+          fontSize: moderateScale(10, 0.6),
+          textAlign: 'right',
+          marginTop: moderateScale(5, 0.6),
+          marginTop: moderateScale(5, 0.6),
+        }}
+        locations={[0, 1]}
+        colors={['#00BCD4', '#3D0B83']}>
+        <Text onPress={() => setCount(count + 1)}>
+          + ADICIONAR MAIS ESPECIALIDADES
+        </Text>
+      </LinearTextGradient>
       <InputStyled
-        label={'Referência'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        label={'Leitos Disponíveis'}
+        onChangeText={value => props.handleChange('qtLeito', value, 'hospital')}
+        value={data.hospital.qtLeito}
+        type={'numeric'}
       />
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default CadastroReferencia;

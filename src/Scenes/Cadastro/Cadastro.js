@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
 
@@ -9,32 +9,70 @@ import CadastroHospital from '../../Components/CadastroHospital';
 import CadastroReferencia from '../../Components/CadastroReferencia';
 import Step from '../../Components/Step';
 
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-
 const Cadastro = props => {
-  const [form, setForm] = useState(props.form);
-  let nextForm;
+  const [component, setComponent] = useState(props.component);
+  const [form, setForm] = useState({
+    dcLogin: '',
+    dcSenha: '',
+    dcEmail: '',
+    hospital: {
+      nmHsptal: '',
+      dcTlfone: '',
+      cdReferencia: [],
+      qtLeito: '',
+    },
+    endereco: {
+      nmEstado: '',
+      nmCidade: '',
+      nmBairro: '',
+      nmRua: '',
+      nrNumero: '',
+      dcComplmnto: '',
+      dcCep: '',
+    },
+  });
+  let nextComponent;
 
-  const renderCadastro = form => {
-    if (form == 'login') {
-      nextForm = 'hospital';
-      return <CadastroUsuario />;
-    } else if (form == 'hospital') {
-      nextForm = 'referencia';
-      return <CadastroHospital />;
-    } else if (form == 'referencia') {
-      return <CadastroReferencia />;
+  const handleChange = (name, value, type = null, index = null) => {
+    if (name == 'nrNumero' || name == 'qtLeito')
+      value = value.replace(/[^0-9]/g, '');
+
+    if (type !== null) {
+      if (name == 'cdReferencia' && index !== null) {
+        const newObj = form;
+
+        newObj[type][name][index] = value;
+
+        setForm(newObj);
+
+        console.log(newObj);
+      } else {
+        setForm({...form, [type]: {...form[type], [name]: value}});
+      }
+    } else setForm({...form, [name]: value});
+  };
+
+  const handleSubmit = component => {
+    console.log(form);
+  };
+
+  const renderCadastro = component => {
+    if (component == 'login') {
+      nextComponent = 'hospital';
+      return <CadastroUsuario handleChange={handleChange} />;
+    } else if (component == 'hospital') {
+      nextComponent = 'referencia';
+      return <CadastroHospital handleChange={handleChange} />;
+    } else if (component == 'referencia') {
+      return <CadastroReferencia handleChange={handleChange} data={form} />;
     }
   };
 
-  const onTouchEnd = nextForm => {
-    if (form == 'referencia') {
-      Actions.Welcome();
+  const onTouchEnd = nextComponent => {
+    if (component == 'referencia') {
+      handleSubmit();
     } else {
-      setForm(nextForm);
+      setComponent(nextComponent);
     }
   };
 
@@ -47,10 +85,10 @@ const Cadastro = props => {
   return (
     <>
       <Step step={1} titles={stepsTitles} />
-      <View style={styles.cadastro}>{renderCadastro(form)}</View>
+      <View style={styles.cadastro}>{renderCadastro(component)}</View>
       <View style={styles.rodape}>
         <Rodape
-          onTouchEnd={() => onTouchEnd(nextForm)}
+          onTouchEnd={() => onTouchEnd(nextComponent)}
           label={'Cadastrar'}
           text={'JÁ TEM UMA CONTA? CONECTE-SE'}
         />

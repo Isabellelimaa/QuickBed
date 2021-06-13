@@ -1,35 +1,31 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
 import InputStyled from '../InputStyled';
 
 const CadastroUsuario = props => {
-  const [value, setValue] = useState(0);
-
   return (
     <>
       <InputStyled
         label={'E-mail'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value => props.handleChange('dcEmail', value)}
+        value={props.dcEmail}
+        type={'default'}
       />
       <InputStyled
         label={'Login'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value => props.handleChange('dcLogin', value)}
+        value={props.dcLogin}
+        type={'default'}
       />
       <InputStyled
         label={'Senha'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value => props.handleChange('dcSenha', value)}
+        value={props.dcSenha}
+        type={'default'}
+        secureTextEntry
       />
     </>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default CadastroUsuario;

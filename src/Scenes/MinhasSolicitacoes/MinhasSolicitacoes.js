@@ -1,26 +1,59 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, ImageBackground, ScrollView} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
-import {Actions} from 'react-native-router-flux';
+import {Action} from 'react-native-router-flux';
 
+import {API} from '../../Configs/AxiosConfigs';
 import Message from '../../Components/Message';
 
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-
 const MinhasSolicitacoes = props => {
+  const [data, setData] = useState([]);
+  const [label, setLabel] = useState([]);
+
+  const renderMessages = () => {
+    return data.map((value, index) => {
+      return (
+        <Message
+          nmPaciente={value.paciente.nmPaciente}
+          dcCpf={value.paciente.dcCpf}
+          nmStatus={value.status.nmStatus}
+          dcMotivo={value.dcMotivo}
+          dataRegistro={value.dataRegistro}
+          dataRegistro={value.dataRegistro}
+        />
+      );
+    });
+  };
+
+  useEffect(() => {
+    if (props.navigation.state.routeName == '_notificacoes') {
+      API.get('solicitacao/enviadas?cdUsuario=1')
+        .then(response => {
+          setData(response.data.resultado);
+          setLabel('Minhas solicitações');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      API.get('solicitacao/recebidas?cdHsptal=1')
+        .then(response => {
+          setData(response.data.resultado);
+          setLabel('Solicitações recebidas');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }, []);
   return (
     <>
       <ImageBackground
         source={require('../../Assets/Vector.png')}
         style={styles.image}>
-        <Text style={styles.text}>Minhas solicitações</Text>
+        <Text style={styles.text}>{label}</Text>
       </ImageBackground>
-      <View>
-        <Message />
-      </View>
+      <ScrollView>{renderMessages()}</ScrollView>
     </>
   );
 };

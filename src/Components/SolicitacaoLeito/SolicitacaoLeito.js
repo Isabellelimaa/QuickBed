@@ -7,7 +7,7 @@ import InputStyled from '../InputStyled';
 import Card from '../Card';
 
 const SolicitacaoDetalhes = props => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
 
   const hospitais = [
     {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
@@ -34,7 +34,7 @@ const SolicitacaoDetalhes = props => {
         label={'Buscar por Hospitais'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
       <View style={styles.viewText}>
         <Text style={{fontWeight: 'bold', fontSize: 20}}>

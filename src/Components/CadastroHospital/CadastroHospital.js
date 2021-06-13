@@ -1,54 +1,69 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
 import InputStyled from '../InputStyled';
 
 const CadastroHospital = props => {
-  const [value, setValue] = useState(0);
-
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <InputStyled
         label={'Nome'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value =>
+          props.handleChange('nmHsptal', value, 'hospital')
+        }
+        value={props.nmHsptal}
+        type={'default'}
       />
       <InputStyled
         label={'Telefone'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value =>
+          props.handleChange('dcTlfone', value, 'hospital')
+        }
+        value={props.dcTlfone}
+        type={'default'}
       />
       <InputStyled
         label={'CEP'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value => props.handleChange('dcCep', value, 'hospital')}
+        value={props.dcCep}
+        type={'default'}
       />
       <InputStyled
         label={'Endereço'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value => props.handleChange('nmRua', value, 'endereco')}
+        value={props.nmRua}
+        type={'default'}
+      />
+      <InputStyled
+        label={'Número'}
+        onChangeText={value =>
+          props.handleChange('nrNumero', value, 'endereco')
+        }
+        value={props.nrNumero}
+        type={'numeric'}
       />
       <InputStyled
         label={'Bairro'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value =>
+          props.handleChange('nmBairro', value, 'endereco')
+        }
+        value={props.nmBairro}
+        type={'default'}
       />
       <InputStyled
         label={'Cidade'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value =>
+          props.handleChange('nmCidade', value, 'endereco')
+        }
+        value={props.nmCidade}
+        type={'default'}
       />
       <InputStyled
         label={'Estado'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'text'}
+        onChangeText={value =>
+          props.handleChange('nmEstado', value, 'endereco')
+        }
+        value={props.nmEstado}
+        type={'default'}
       />
     </ScrollView>
   );

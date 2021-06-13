@@ -43,7 +43,7 @@ const Welcome = () => {
             Procure leitos para seus pacientes de maneira fácil e rápida!
           </Text>
           <Rodape
-            onTouchEnd={() => Actions.Cadastro({form: 'login'})}
+            onTouchEnd={() => Actions.Cadastro({component: 'login'})}
             label={'Cadastrar'}
             text={'JÁ TEM UMA CONTA? CONECTE-SE'}
           />

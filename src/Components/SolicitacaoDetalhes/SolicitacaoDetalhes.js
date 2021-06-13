@@ -5,7 +5,7 @@ import InputStyled from '../InputStyled';
 import CheckboxStyled from '../CheckboxStyled';
 
 const SolicitacaoDetalhes = props => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
 
   return (
     <ScrollView>
@@ -13,7 +13,7 @@ const SolicitacaoDetalhes = props => {
         label={'Trauma'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
       <View style={styles.container}>
         <CheckboxStyled name={'teste'} label={'teste'} />
@@ -25,7 +25,7 @@ const SolicitacaoDetalhes = props => {
         label={'Informações Importantes'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
     </ScrollView>
   );

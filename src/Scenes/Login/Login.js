@@ -3,16 +3,12 @@ import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {LinearTextGradient} from 'react-native-text-gradient';
 import {Actions} from 'react-native-router-flux';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 
 import InputStyled from '../../Components/InputStyled';
 import Rodape from '../../Components/Rodape';
 
 const Login = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
 
   return (
     <>
@@ -38,14 +34,14 @@ const Login = () => {
           <InputStyled
             label={'Login'}
             onChangeText={() => console.log('teste')}
+            type={'default'}
             value={value}
-            type={'text'}
           />
           <InputStyled
             label={'Senha'}
             onChangeText={() => console.log('teste')}
             value={value}
-            type={'password'}
+            type={'visible-password'}
             secureTextEntry
           />
         </View>

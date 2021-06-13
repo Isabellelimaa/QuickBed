@@ -4,7 +4,7 @@ import {StyleSheet, ScrollView} from 'react-native';
 import InputStyled from '../InputStyled/InputStyled';
 
 const SolicitacaoPaciente = props => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(null);
 
   return (
     <ScrollView>
@@ -12,19 +12,19 @@ const SolicitacaoPaciente = props => {
         label={'Nome do Paciente'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
       <InputStyled
         label={'CPF'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
       <InputStyled
         label={'RG'}
         onChangeText={() => console.log('teste')}
         value={value}
-        type={'text'}
+        type={'default'}
       />
     </ScrollView>
   );

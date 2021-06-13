@@ -3,7 +3,7 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Scene, Router, Stack, Actions} from 'react-native-router-flux';
 
-import Cadastro from '../../Scenes/Cadastro';
+import Configuracoes from '../../Scenes/Configuracoes';
 import Login from '../../Scenes/Login';
 import NovaSolicitacao from '../../Scenes/NovaSolicitacao';
 import MinhasSolicitacoes from '../../Scenes/MinhasSolicitacoes';
@@ -130,7 +130,7 @@ const NavBar = () => {
             <Scene
               key="recebidas"
               initial={true}
-              component={Cadastro}
+              component={MinhasSolicitacoes}
               hideNavBar={true}
               icon={SearchTab}
               title="Recebidas"
@@ -151,7 +151,7 @@ const NavBar = () => {
             />
             <Scene
               key="configuracoes"
-              component={Login}
+              component={Configuracoes}
               hideNavBar={true}
               icon={SettingsTab}
               title="Configurações"
