@@ -19,7 +19,6 @@ const MinhasSolicitacoes = props => {
           nmStatus={value.status.nmStatus}
           dcMotivo={value.dcMotivo}
           dataRegistro={value.dataRegistro}
-          dataRegistro={value.dataRegistro}
         />
       );
     });

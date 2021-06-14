@@ -47,7 +47,7 @@ const Login = () => {
         </View>
         <View style={styles.grid}>
           <Rodape
-            onTouchEnd={() => Actions.Home()}
+            onTouchEnd={() => Actions.NavBar()}
             label={'Acessar'}
             text={'NÃO POSSUI CONTA? CADASTRE-SE'}
           />

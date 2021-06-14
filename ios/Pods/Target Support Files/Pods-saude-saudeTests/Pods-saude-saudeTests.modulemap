@@ -1,0 +1,6 @@
+module Pods_saude_saudeTests {
+  umbrella header "Pods-saude-saudeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
