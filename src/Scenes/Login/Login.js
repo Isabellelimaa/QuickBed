@@ -41,7 +41,7 @@ const Login = () => {
             label={'Senha'}
             onChangeText={() => console.log('teste')}
             value={value}
-            type={'password'}
+            type={'default'}
             secureTextEntry
           />
         </View>

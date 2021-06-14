@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.saude",
+    package = "com.quickbed",
 )
 
 android_resource(
     name = "res",
-    package = "com.saude",
+    package = "com.quickbed",
     res = "src/main/res",
 )
 

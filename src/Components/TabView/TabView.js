@@ -38,7 +38,7 @@ const TabView = props => {
       <FlatList
         data={data}
         renderItem={({item}) => <ItemTabView data={item} />}
-        keyExtractor={item => Math.random()}
+        keyExtractor={item => `${item.name}-${Math.random()}`}
         ItemSeparatorComponent={() => <View style={styles.viewSeparator} />}
       />
     );

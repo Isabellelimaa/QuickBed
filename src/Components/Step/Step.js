@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   linearGradient: {
-    width: moderateScale(18, 0.6),
-    height: moderateScale(18, 0.6),
     marginTop: moderateScale(8, 0.6),
-    borderRadius: 10,
+    borderRadius: moderateScale(10, 0.6),
   },
   textLinearGradient: {
+    width: moderateScale(18, 0.6),
+    height: moderateScale(18, 0.6),
     color: '#FFFFFF',
     fontSize: moderateScale(12, 0.6),
     textAlign: 'center',
