@@ -23,7 +23,6 @@ const CadastroReferencia = ({data, handleChange}) => {
 
   const renderReferencia = () => {
     return new Array(count).fill(null).map((item, index) => {
-      console.log(`render: {${index}}`);
       return (
         <SelectStyled
           label={'Referência'}

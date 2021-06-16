@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
 
@@ -9,32 +9,56 @@ import SolicitacaoDetalhes from '../../Components/SolicitacaoDetalhes';
 import SolicitacaoLeito from '../../Components/SolicitacaoLeito';
 import Rodape from '../../Components/Rodape';
 
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-
 const NovaSolicitacao = props => {
-  const [form, setForm] = useState('paciente');
-  let nextForm;
+  const [component, setComponent] = useState('paciente');
+  const [form, setForm] = useState({
+    cdUsuario: '',
+    cdHsptal: '',
+    paciente: {
+      nmPaciente: '',
+      dcCpf: '',
+      dcRg: '',
+    },
+    dcMotivo: '',
+    cdExame: [],
+    cdEnfrmdade: [],
+  });
+  let nextComponent;
 
-  const renderCadastro = form => {
-    if (form == 'paciente') {
-      nextForm = 'detalhes';
-      return <SolicitacaoPaciente />;
-    } else if (form == 'detalhes') {
-      nextForm = 'leito';
-      return <SolicitacaoDetalhes />;
-    } else if (form == 'leito') {
-      return <SolicitacaoLeito />;
+  const handleChange = (name, value, type = null, index = null) => {
+    if (type !== null) {
+      if ((name == 'cdEnfrmdade' || name == 'cdExame') && index !== null) {
+        const newObj = form;
+
+        newObj[type][name][index] = value;
+
+        setForm(newObj);
+
+        console.log(newObj);
+      } else {
+        setForm({...form, [type]: {...form[type], [name]: value}});
+      }
+    } else setForm({...form, [name]: value});
+  };
+
+  const renderCadastro = component => {
+    if (component == 'paciente') {
+      nextComponent = 'detalhes';
+      return <SolicitacaoPaciente handleChange={handleChange} data={form} />;
+    } else if (component == 'detalhes') {
+      nextComponent = 'leito';
+      return <SolicitacaoDetalhes handleChange={handleChange} data={form} />;
+    } else if (component == 'leito') {
+      return <SolicitacaoLeito handleChange={handleChange} data={form} />;
     }
   };
 
-  const onTouchEnd = nextForm => {
-    if (form == 'leito') {
-      Actions.Welcome();
+  const onTouchEnd = nextComponent => {
+    if (component == 'leito') {
+      console.log(form);
+      // Actions.Welcome();
     } else {
-      setForm(nextForm);
+      setComponent(nextComponent);
     }
   };
 
@@ -47,9 +71,12 @@ const NovaSolicitacao = props => {
   return (
     <>
       <Step step={1} titles={stepsTitles} />
-      <View style={styles.cadastro}>{renderCadastro(form)}</View>
+      <View style={styles.cadastro}>{renderCadastro(component)}</View>
       <View style={styles.rodape}>
-        <Rodape onTouchEnd={() => onTouchEnd(nextForm)} label={'Continuar'} />
+        <Rodape
+          onTouchEnd={() => onTouchEnd(nextComponent)}
+          label={'Continuar'}
+        />
       </View>
     </>
   );

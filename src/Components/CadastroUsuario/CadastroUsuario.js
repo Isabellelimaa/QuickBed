@@ -1,26 +1,25 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import InputStyled from '../InputStyled';
 
-const CadastroUsuario = props => {
+const CadastroUsuario = ({data, handleChange}) => {
   return (
     <>
       <InputStyled
         label={'E-mail'}
-        onChangeText={value => props.handleChange('dcEmail', value)}
-        value={props.dcEmail}
+        onChangeText={value => handleChange('dcEmail', value)}
+        value={data.dcEmail}
         type={'default'}
       />
       <InputStyled
         label={'Login'}
-        onChangeText={value => props.handleChange('dcLogin', value)}
-        value={props.dcLogin}
+        onChangeText={value => handleChange('dcLogin', value)}
+        value={data.dcLogin}
         type={'default'}
       />
       <InputStyled
         label={'Senha'}
-        onChangeText={value => props.handleChange('dcSenha', value)}
-        value={props.dcSenha}
+        onChangeText={value => handleChange('dcSenha', value)}
+        value={data.dcSenha}
         type={'default'}
         secureTextEntry
       />

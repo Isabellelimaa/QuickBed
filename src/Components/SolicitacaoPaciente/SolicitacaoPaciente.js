@@ -1,35 +1,31 @@
-import React, {useState} from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import React from 'react';
+import {ScrollView} from 'react-native';
 
 import InputStyled from '../InputStyled/InputStyled';
 
-const SolicitacaoPaciente = props => {
-  const [value, setValue] = useState(null);
-
+const SolicitacaoPaciente = ({data, handleChange}) => {
   return (
     <ScrollView>
       <InputStyled
         label={'Nome do Paciente'}
-        onChangeText={() => console.log('teste')}
-        value={value}
+        onChangeText={value => handleChange('nmPaciente', value, 'paciente')}
+        value={data.paciente.nmPaciente}
         type={'default'}
       />
       <InputStyled
         label={'CPF'}
-        onChangeText={() => console.log('teste')}
-        value={value}
+        onChangeText={value => handleChange('dcCpf', value, 'paciente')}
+        value={data.paciente.dcCpf}
         type={'default'}
       />
       <InputStyled
         label={'RG'}
-        onChangeText={() => console.log('teste')}
-        value={value}
+        onChangeText={value => handleChange('dcRg', value, 'paciente')}
+        value={data.paciente.dcRg}
         type={'default'}
       />
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default SolicitacaoPaciente;

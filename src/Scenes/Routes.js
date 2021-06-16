@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Welcome from './Welcome';
 import Cadastro from './Cadastro';
+import Confirmacao from './Confirmacao';
 import Login from './Login';
 import NavBar from './NavBar';
 
@@ -21,6 +22,7 @@ const Routes = () => {
           )} */}
           <Scene key="Welcome" component={Welcome} hideNavBar initial />
           <Scene key="Cadastro" component={Cadastro} hideNavBar />
+          <Scene key="Confirmacao" component={Confirmacao} hideNavBar />
           <Scene key="Login" component={Login} hideNavBar />
           <Scene key="NavBar" component={NavBar} hideNavBar />
         </Scene>

@@ -1,74 +1,60 @@
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import InputStyled from '../InputStyled';
 
-const CadastroHospital = props => {
+const CadastroHospital = ({data, handleChange}) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <InputStyled
         label={'Nome'}
-        onChangeText={value =>
-          props.handleChange('nmHsptal', value, 'hospital')
-        }
-        value={props.nmHsptal}
+        onChangeText={value => handleChange('nmHsptal', value, 'hospital')}
+        value={data.hospital.nmHsptal}
         type={'default'}
       />
       <InputStyled
         label={'Telefone'}
-        onChangeText={value =>
-          props.handleChange('dcTlfone', value, 'hospital')
-        }
-        value={props.dcTlfone}
+        onChangeText={value => handleChange('dcTlfone', value, 'hospital')}
+        value={data.hospital.dcTlfone}
         type={'default'}
       />
       <InputStyled
         label={'CEP'}
-        onChangeText={value => props.handleChange('dcCep', value, 'hospital')}
-        value={props.dcCep}
+        onChangeText={value => handleChange('dcCep', value, 'hospital')}
+        value={data.hospital.dcCep}
         type={'default'}
       />
       <InputStyled
         label={'Endereço'}
-        onChangeText={value => props.handleChange('nmRua', value, 'endereco')}
-        value={props.nmRua}
+        onChangeText={value => handleChange('nmRua', value, 'endereco')}
+        value={data.endereco.nmRua}
         type={'default'}
       />
       <InputStyled
         label={'Número'}
-        onChangeText={value =>
-          props.handleChange('nrNumero', value, 'endereco')
-        }
-        value={props.nrNumero}
+        onChangeText={value => handleChange('nrNumero', value, 'endereco')}
+        value={data.endereco.nrNumero}
         type={'numeric'}
       />
       <InputStyled
         label={'Bairro'}
-        onChangeText={value =>
-          props.handleChange('nmBairro', value, 'endereco')
-        }
-        value={props.nmBairro}
+        onChangeText={value => handleChange('nmBairro', value, 'endereco')}
+        value={data.endereco.nmBairro}
         type={'default'}
       />
       <InputStyled
         label={'Cidade'}
-        onChangeText={value =>
-          props.handleChange('nmCidade', value, 'endereco')
-        }
-        value={props.nmCidade}
+        onChangeText={value => handleChange('nmCidade', value, 'endereco')}
+        value={data.endereco.nmCidade}
         type={'default'}
       />
       <InputStyled
         label={'Estado'}
-        onChangeText={value =>
-          props.handleChange('nmEstado', value, 'endereco')
-        }
-        value={props.nmEstado}
+        onChangeText={value => handleChange('nmEstado', value, 'endereco')}
+        value={data.endereco.nmEstado}
         type={'default'}
       />
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default CadastroHospital;

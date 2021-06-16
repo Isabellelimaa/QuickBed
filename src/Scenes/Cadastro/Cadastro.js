@@ -3,6 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
 
+import {API} from '../../Configs/AxiosConfigs';
 import Rodape from '../../Components/Rodape';
 import CadastroUsuario from '../../Components/CadastroUsuario';
 import CadastroHospital from '../../Components/CadastroHospital';
@@ -34,9 +35,6 @@ const Cadastro = props => {
   let nextComponent;
 
   const handleChange = (name, value, type = null, index = null) => {
-    if (name == 'nrNumero' || name == 'qtLeito')
-      value = value.replace(/[^0-9]/g, '');
-
     if (type !== null) {
       if (name == 'cdReferencia' && index !== null) {
         const newObj = form;
@@ -53,16 +51,23 @@ const Cadastro = props => {
   };
 
   const handleSubmit = component => {
-    console.log(form);
+    API.post('/usuario', form)
+      .then(response => {
+        Actions.Confirmacao({mensagen: response.data.mensagem});
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    console.log();
   };
 
   const renderCadastro = component => {
     if (component == 'login') {
       nextComponent = 'hospital';
-      return <CadastroUsuario handleChange={handleChange} />;
+      return <CadastroUsuario handleChange={handleChange} data={form} />;
     } else if (component == 'hospital') {
       nextComponent = 'referencia';
-      return <CadastroHospital handleChange={handleChange} />;
+      return <CadastroHospital handleChange={handleChange} data={form} />;
     } else if (component == 'referencia') {
       return <CadastroReferencia handleChange={handleChange} data={form} />;
     }
