@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, ImageBackground, ScrollView} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Action} from 'react-native-router-flux';
+import {useSelector} from 'react-redux';
 
 import {API} from '../../Configs/AxiosConfigs';
 import Message from '../../Components/Message';
@@ -9,6 +10,7 @@ import Message from '../../Components/Message';
 const MinhasSolicitacoes = props => {
   const [data, setData] = useState([]);
   const [label, setLabel] = useState([]);
+  const usuarioDataStore = useSelector(store => store.UserReducer.login_data);
 
   const renderMessages = () => {
     return data.map((value, index) => {
@@ -25,26 +27,28 @@ const MinhasSolicitacoes = props => {
   };
 
   useEffect(() => {
-    if (props.navigation.state.routeName == '_notificacoes') {
-      API.get('solicitacao/enviadas?cdUsuario=1')
-        .then(response => {
-          setData(response.data.resultado);
-          setLabel('Minhas solicitações');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
-      API.get('solicitacao/recebidas?cdHsptal=1')
-        .then(response => {
-          setData(response.data.resultado);
-          setLabel('Solicitações recebidas');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-  }, []);
+    console.log(usuarioDataStore);
+
+    // if (props.navigation.state.routeName == '_notificacoes') {
+    //   API.get('solicitacao/enviadas?cdUsuario=1')
+    //     .then(response => {
+    //       setData(response.data.resultado);
+    //       setLabel('Minhas solicitações');
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
+    // } else {
+    //   API.get('solicitacao/recebidas?cdHsptal=1')
+    //     .then(response => {
+    //       setData(response.data.resultado);
+    //       setLabel('Solicitações recebidas');
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
+    // }
+  });
   return (
     <>
       <ImageBackground

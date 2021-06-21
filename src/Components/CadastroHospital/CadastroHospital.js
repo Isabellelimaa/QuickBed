@@ -19,7 +19,7 @@ const CadastroHospital = ({data, handleChange}) => {
       />
       <InputStyled
         label={'CEP'}
-        onChangeText={value => handleChange('dcCep', value, 'hospital')}
+        onChangeText={value => handleChange('dcCep', value, 'endereco')}
         value={data.hospital.dcCep}
         type={'default'}
       />

@@ -1,14 +1,23 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
+import {View, StyleSheet, Image, ImageBackground} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
-import {LinearTextGradient} from 'react-native-text-gradient';
 import {Actions} from 'react-native-router-flux';
+import {useDispatch} from 'react-redux';
 
 import InputStyled from '../../Components/InputStyled';
 import Rodape from '../../Components/Rodape';
+import {authenticate} from '../../Redux/UserReducers/UserReducer';
 
 const Login = () => {
-  const [value, setValue] = useState(null);
+  const [login, setLogin] = useState(null);
+  const [senha, setSenha] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const handlerSubmit = () => {
+    dispatch(authenticate({dcLogin: login, dcSenha: senha}));
+    // Actions.NavBar();
+  };
 
   return (
     <>
@@ -33,21 +42,21 @@ const Login = () => {
         <View style={styles.grid}>
           <InputStyled
             label={'Login'}
-            onChangeText={() => console.log('teste')}
+            onChangeText={value => setLogin(value)}
             type={'default'}
-            value={value}
+            value={login}
           />
           <InputStyled
             label={'Senha'}
-            onChangeText={() => console.log('teste')}
-            value={value}
+            onChangeText={value => setSenha(value)}
+            value={senha}
             type={'default'}
             secureTextEntry
           />
         </View>
         <View style={styles.grid}>
           <Rodape
-            onTouchEnd={() => Actions.NavBar()}
+            onTouchEnd={handlerSubmit}
             label={'Acessar'}
             text={'NÃO POSSUI CONTA? CADASTRE-SE'}
           />

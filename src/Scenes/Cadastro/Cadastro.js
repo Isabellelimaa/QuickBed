@@ -50,15 +50,14 @@ const Cadastro = props => {
     } else setForm({...form, [name]: value});
   };
 
-  const handleSubmit = component => {
+  const handleSubmit = () => {
     API.post('/usuario', form)
       .then(response => {
-        Actions.Confirmacao({mensagen: response.data.mensagem});
+        Actions.Confirmacao({mensagem: response.data.mensagem});
       })
       .catch(error => {
         console.log(error);
       });
-    console.log();
   };
 
   const renderCadastro = component => {

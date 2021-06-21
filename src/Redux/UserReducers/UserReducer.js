@@ -63,9 +63,9 @@ export const authenticate = auth => {
     try {
       handleApi(true, Types.AUTH, dispatch);
       API_AUTH()
-        .post('/login', auth)
+        .post('/usuario/login', auth)
         .then(response => {
-          handleApiSuccess(response.data.result, Types.AUTH, dispatch);
+          handleApiSuccess(response.data.resultado.user, Types.AUTH, dispatch);
         })
         .catch(error => {
           if (!error.response) handleNetworkError(dispatch);

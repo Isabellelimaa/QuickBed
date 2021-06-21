@@ -50,7 +50,6 @@ const CadastroReferencia = ({data, handleChange}) => {
           fontSize: moderateScale(10, 0.6),
           textAlign: 'right',
           marginTop: moderateScale(5, 0.6),
-          marginTop: moderateScale(5, 0.6),
         }}
         locations={[0, 1]}
         colors={['#00BCD4', '#3D0B83']}>

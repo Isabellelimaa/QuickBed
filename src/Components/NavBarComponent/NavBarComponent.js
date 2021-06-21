@@ -128,7 +128,6 @@ const NavBarComponent = () => {
             />
             <Scene
               key="recebidas"
-              initial={true}
               component={MinhasSolicitacoes}
               hideNavBar={true}
               icon={SearchTab}
@@ -136,6 +135,7 @@ const NavBarComponent = () => {
             />
             <Scene
               key="solicitar"
+              initial={true}
               component={NovaSolicitacao}
               hideNavBar={true}
               icon={AddSolTab}
