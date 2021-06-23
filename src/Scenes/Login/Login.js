@@ -3,6 +3,7 @@ import {View, StyleSheet, Image, ImageBackground} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
 import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import InputStyled from '../../Components/InputStyled';
 import Rodape from '../../Components/Rodape';
@@ -15,8 +16,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handlerSubmit = () => {
+    console.log({dcLogin: login, dcSenha: senha});
     dispatch(authenticate({dcLogin: login, dcSenha: senha}));
-    // Actions.NavBar();
   };
 
   return (

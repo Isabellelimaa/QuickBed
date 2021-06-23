@@ -9079,7 +9079,7 @@
 			buildConfigurationList = 3E9CEE60D0512482D6C9F58DAA543B62 /* Build configuration list for PBXNativeTarget "FBReactNativeSpec" */;
 			buildPhases = (
 				F2E8B87AAEB7B362592B6872F52AE11F /* Headers */,
-				627AB1648A0E42B51E607C2C1116AD0E /* [CP-User] Generate Specs */,
+				FB0D013B58A9212532B7F99C8AC65EA2 /* [CP-User] Generate Specs */,
 				ECB01F1C3375C277E90B6A95B64706F5 /* Sources */,
 				A8F36C82CE4302646D172118B27B2CF5 /* Frameworks */,
 			);
@@ -9435,23 +9435,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		627AB1648A0E42B51E607C2C1116AD0E /* [CP-User] Generate Specs */ = {
+		FB0D013B58A9212532B7F99C8AC65EA2 /* [CP-User] Generate Specs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"/Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/../Libraries",
+				"/Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/../Libraries",
 			);
 			name = "[CP-User] Generate Specs";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/codegen-FBReactNativeSpec.log",
-				"/Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec/FBReactNativeSpec.h",
-				"/Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec/FBReactNativeSpec-generated.mm",
+				"/Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec/FBReactNativeSpec.h",
+				"/Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec/FBReactNativeSpec-generated.mm",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -o pipefail\n\nbash -l -c 'SRCS_DIR=/Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/../Libraries CODEGEN_MODULES_OUTPUT_DIR=/Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec CODEGEN_MODULES_LIBRARY_NAME=FBReactNativeSpec /Users/isabellelima/Desktop/QuickBed/node_modules/react-native/scripts/generate-specs.sh' 2>&1 | tee \"${SCRIPT_OUTPUT_FILE_0}\"";
+			shellScript = "set -o pipefail\n\nbash -l -c 'SRCS_DIR=/Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/../Libraries CODEGEN_MODULES_OUTPUT_DIR=/Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/../React/FBReactNativeSpec/FBReactNativeSpec CODEGEN_MODULES_LIBRARY_NAME=FBReactNativeSpec /Users/isabellelima/Desktop/ProjetoAplicado/QuickBed/node_modules/react-native/scripts/generate-specs.sh' 2>&1 | tee \"${SCRIPT_OUTPUT_FILE_0}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -7,7 +7,7 @@ const Card = props => {
   const [value, setValue] = useState(0);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={props.key}>
       <View style={styles.viewImage}>
         <Image
           resizeMode={'contain'}

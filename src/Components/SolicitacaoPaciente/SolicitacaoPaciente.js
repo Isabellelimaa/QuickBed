@@ -1,11 +1,10 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 
 import InputStyled from '../InputStyled/InputStyled';
 
 const SolicitacaoPaciente = ({data, handleChange}) => {
   return (
-    <ScrollView>
+    <>
       <InputStyled
         label={'Nome do Paciente'}
         onChangeText={value => handleChange('nmPaciente', value, 'paciente')}
@@ -24,7 +23,7 @@ const SolicitacaoPaciente = ({data, handleChange}) => {
         value={data.paciente.dcRg}
         type={'default'}
       />
-    </ScrollView>
+    </>
   );
 };
 

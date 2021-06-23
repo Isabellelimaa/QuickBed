@@ -1,4 +1,6 @@
-import {API_AUTH} from '../../Configs/AxiosConfigs';
+import {Actions} from 'react-native-router-flux';
+
+import {API} from '../../Configs/AxiosConfigs';
 import {
   handleApi,
   handleApiSuccess,
@@ -62,10 +64,10 @@ export const authenticate = auth => {
   return async dispatch => {
     try {
       handleApi(true, Types.AUTH, dispatch);
-      API_AUTH()
-        .post('/usuario/login', auth)
+      API.post('/usuario/login', auth)
         .then(response => {
-          handleApiSuccess(response.data.resultado.user, Types.AUTH, dispatch);
+          handleApiSuccess(response.data.resultado, Types.AUTH, dispatch);
+          Actions.NavBar();
         })
         .catch(error => {
           if (!error.response) handleNetworkError(dispatch);
@@ -81,7 +83,7 @@ export const recoverPass = email => {
   return async dispatch => {
     try {
       handleApi(true, Types.RECOVER_PASS, dispatch);
-      API_AUTH()
+      API()
         .get(`recoverUsuario?email=${email}`)
         .then(response => {
           handleApiSuccess(response.data.message, Types.RECOVER_PASS, dispatch);

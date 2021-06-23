@@ -5,6 +5,7 @@ import {API} from '../../Configs/AxiosConfigs';
 import InputStyled from '../InputStyled';
 import CheckboxStyled from '../CheckboxStyled';
 import SelectStyled from '../SelectStyled/SelectStyled';
+import {moderateScale} from 'react-native-size-matters';
 
 const SolicitacaoDetalhes = ({data, handleChange}) => {
   const [enfermidade, setEnfermidade] = useState([]);
@@ -50,27 +51,17 @@ const SolicitacaoDetalhes = ({data, handleChange}) => {
   };
 
   return (
-    <>
-      <ScrollView>
-        {renderEnfermidade()}
-        <View style={styles.container}>{renderExame()}</View>
-        <InputStyled
-          label={'Informações Importantes'}
-          onChangeText={value => handleChange('dcMotivo', value)}
-          value={data.dcMotivo}
-          type={'default'}
-        />
-      </ScrollView>
-    </>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {renderEnfermidade()}
+      <View>{renderExame()}</View>
+      <InputStyled
+        label={'Informações Importantes'}
+        onChangeText={value => handleChange('dcMotivo', value)}
+        value={data.dcMotivo}
+        type={'default'}
+      />
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});
 
 export default SolicitacaoDetalhes;

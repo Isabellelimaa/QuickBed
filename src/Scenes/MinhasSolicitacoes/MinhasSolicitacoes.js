@@ -27,28 +27,44 @@ const MinhasSolicitacoes = props => {
   };
 
   useEffect(() => {
-    console.log(usuarioDataStore);
+    console.log(usuarioDataStore.response.accessToken);
 
-    // if (props.navigation.state.routeName == '_notificacoes') {
-    //   API.get('solicitacao/enviadas?cdUsuario=1')
-    //     .then(response => {
-    //       setData(response.data.resultado);
-    //       setLabel('Minhas solicitações');
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // } else {
-    //   API.get('solicitacao/recebidas?cdHsptal=1')
-    //     .then(response => {
-    //       setData(response.data.resultado);
-    //       setLabel('Solicitações recebidas');
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // }
-  });
+    if (props.navigation.state.routeName == '_notificacoes') {
+      API.get(
+        // `solicitacao/enviadas?cdUsuario=${usuarioDataStore.response.user.cdUsuario}`,
+        'solicitacao/enviadas?cdUsuario=1',
+        {
+          headers: {
+            Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
+          },
+        },
+      )
+        .then(response => {
+          setData(response.data.resultado);
+          setLabel('Minhas solicitações');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      API.get(
+        // `solicitacao/recebidas?cdHsptal=${usuarioDataStore.response}`,
+        'solicitacao/recebidas?cdHsptal=1',
+        {
+          headers: {
+            Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
+          },
+        },
+      )
+        .then(response => {
+          setData(response.data.resultado);
+          setLabel('Solicitações recebidas');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }, [usuarioDataStore.response.accessToken, label]);
   return (
     <>
       <ImageBackground

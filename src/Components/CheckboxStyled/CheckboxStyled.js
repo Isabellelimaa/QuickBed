@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     flexDirection: 'row',
+    padding: moderateScale(1.5, 0.6),
   },
   label: {
     margin: 8,

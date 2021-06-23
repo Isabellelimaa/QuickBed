@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
-import {Actions} from 'react-native-router-flux';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
+import { Actions } from 'react-native-router-flux';
 
-import {API} from '../../Configs/AxiosConfigs';
+import { API } from '../../Configs/AxiosConfigs';
 import Rodape from '../../Components/Rodape';
 import CadastroUsuario from '../../Components/CadastroUsuario';
 import CadastroHospital from '../../Components/CadastroHospital';
@@ -45,15 +45,15 @@ const Cadastro = props => {
 
         console.log(newObj);
       } else {
-        setForm({...form, [type]: {...form[type], [name]: value}});
+        setForm({ ...form, [type]: { ...form[type], [name]: value } });
       }
-    } else setForm({...form, [name]: value});
+    } else setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = () => {
     API.post('/usuario', form)
       .then(response => {
-        Actions.Confirmacao({mensagem: response.data.mensagem});
+        Actions.Confirmacao({ mensagem: response.data.mensagem });
       })
       .catch(error => {
         console.log(error);
