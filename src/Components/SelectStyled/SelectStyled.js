@@ -6,13 +6,7 @@ import {Picker} from '@react-native-picker/picker';
 const SelectStyled = props => {
   const renderOptions = () => {
     return props.options.map((value, index) => {
-      return (
-        <Picker.Item
-          label={value.nmRefrncia}
-          value={value.cdRefrncia}
-          key={value.cdRefrncia}
-        />
-      );
+      return <Picker.Item label={value.value} value={value.key} key={index} />;
     });
   };
 

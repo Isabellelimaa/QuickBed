@@ -16,7 +16,7 @@ const TabView = props => {
   });
 
   const renderTabOptions = () => {
-    return props.data.options.map((item, index) => (
+    return props.options.map((item, index) => (
       <TouchableOpacity
         style={styles.viewHeaderOptions(layout.height, props.selected, index)}
         onPress={() => props.onPress(index)}>
@@ -26,17 +26,17 @@ const TabView = props => {
   };
 
   const renderContent = () => {
-    let data = null;
+    // let data = null;
 
-    if (props.selected === 0) {
-      data = props.data.first;
-    } else {
-      data = props.data.second;
-    }
+    // if (props.selected === 0) {
+    //   data = props.data.first;
+    // } else {
+    //   data = props.data.second;
+    // }
 
     return (
       <FlatList
-        data={data}
+        data={props.data}
         renderItem={({item}) => <ItemTabView data={item} />}
         keyExtractor={item => `${item.name}-${Math.random()}`}
         ItemSeparatorComponent={() => <View style={styles.viewSeparator} />}

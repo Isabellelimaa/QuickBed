@@ -14,6 +14,7 @@ const CadastroReferencia = ({data, handleChange}) => {
   useEffect(() => {
     API.get('hospital/list-referencia')
       .then(response => {
+        console.log(response.data.resultado);
         setReferencia(response.data.resultado);
       })
       .catch(error => {

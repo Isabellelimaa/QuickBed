@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions} from 'react-native-router-flux';
+import {useSelector} from 'react-redux';
 
+import {API} from '../../Configs/AxiosConfigs';
 import Step from '../../Components/Step';
 import SolicitacaoPaciente from '../../Components/SolicitacaoPaciente';
 import SolicitacaoDetalhes from '../../Components/SolicitacaoDetalhes';
@@ -10,6 +12,7 @@ import SolicitacaoLeito from '../../Components/SolicitacaoLeito';
 import Rodape from '../../Components/Rodape';
 
 const NovaSolicitacao = props => {
+  const usuarioDataStore = useSelector(store => store.UserReducer.login_data);
   const [component, setComponent] = useState('paciente');
   const [form, setForm] = useState({
     cdUsuario: '',
@@ -26,19 +29,44 @@ const NovaSolicitacao = props => {
   let nextComponent;
 
   const handleChange = (name, value, type = null, index = null) => {
+    console.log(name, value, type, index);
+
+    console.log(form);
     if (type !== null) {
-      if ((name == 'cdEnfrmdade' || name == 'cdExame') && index !== null) {
+      if (name == 'cdEnfrmdade' && index !== null) {
+        console.log('aqui1');
         const newObj = form;
-
-        newObj[type][name][index] = value;
-
+        newObj[name][index] = value;
         setForm(newObj);
-
-        console.log(newObj);
       } else {
         setForm({...form, [type]: {...form[type], [name]: value}});
       }
-    } else setForm({...form, [name]: value});
+    } else {
+      setForm({...form, [name]: value});
+    }
+  };
+
+  const handleCheckBox = (cdCheckbox, isChecked) => {
+    let newForm = form;
+    if (isChecked) newForm.cdExame.push(cdCheckbox);
+    else newForm.cdExame.filter(x => x !== cdCheckbox);
+    setForm(newForm);
+  };
+
+  const handleSubmit = () => {
+    form.cdUsuario = usuarioDataStore.response.user.cdUsuario;
+    API.post('/solicitacao', form, {
+      headers: {
+        Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
+      },
+    })
+      .then(response => {
+        console.log(response);
+        Actions.Confirmacao({mensagem: response.data.mensagem});
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const renderCadastro = component => {
@@ -47,7 +75,13 @@ const NovaSolicitacao = props => {
       return <SolicitacaoPaciente handleChange={handleChange} data={form} />;
     } else if (component == 'detalhes') {
       nextComponent = 'leito';
-      return <SolicitacaoDetalhes handleChange={handleChange} data={form} />;
+      return (
+        <SolicitacaoDetalhes
+          handleChange={handleChange}
+          handleCheckBox={handleCheckBox}
+          data={form}
+        />
+      );
     } else if (component == 'leito') {
       return <SolicitacaoLeito handleChange={handleChange} data={form} />;
     }
@@ -55,8 +89,7 @@ const NovaSolicitacao = props => {
 
   const onTouchEnd = nextComponent => {
     if (component == 'leito') {
-      console.log(form);
-      // Actions.Welcome();
+      handleSubmit();
     } else {
       setComponent(nextComponent);
     }

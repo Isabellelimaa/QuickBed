@@ -1,63 +1,88 @@
-import React, {Fragment, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {Actions, Scene, Router} from 'react-native-router-flux';
+import {useSelector} from 'react-redux';
+
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
+import {API} from '../../Configs/AxiosConfigs';
 import CardUser from '../../Components/CardUser';
 import TabView from '../../Components/TabView';
 
-const cardData = {
-  name: 'Sônia',
-  hospital: 'Hospital Luiz Souza',
-  position: 'Cardiologia',
-};
-
-const tabViewData = {
-  options: ['Notificações', 'Favoritos'],
-  first: [
-    {
-      image: require('../../Assets/UserLogged.png'),
-      name: 'Nome do hospital',
-      description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
-      time: '24 min',
-      distance: '3.5KM',
-      favorite: true,
-    },
-    {
-      image: require('../../Assets/UserLogged.png'),
-      name: 'Nome do hospital',
-      description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
-      time: '24 min',
-      distance: '3.5KM',
-      favorite: false,
-    },
-  ],
-  second: [
-    {
-      image: require('../../Assets/UserLogged.png'),
-      name: 'Nome do hospital 2',
-      description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
-      time: '24 min',
-      distance: '3.5KM',
-      favorite: true,
-    },
-    {
-      image: require('../../Assets/UserLogged.png'),
-      name: 'Nome do hospital 2',
-      description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
-      time: '24 min',
-      distance: '3.5KM',
-      favorite: false,
-    },
-  ],
-};
+// const tabViewData = {
+//   options: ['Notificações', 'Favoritos'],
+//   first: [
+//     {
+//       image: require('../../Assets/UserLogged.png'),
+//       name: 'Nome do hospital',
+//       description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
+//       time: '24 min',
+//       distance: '3.5KM',
+//       favorite: true,
+//     },
+//     {
+//       image: require('../../Assets/UserLogged.png'),
+//       name: 'Nome do hospital',
+//       description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
+//       time: '24 min',
+//       distance: '3.5KM',
+//       favorite: false,
+//     },
+//   ],
+//   second: [
+//     {
+//       image: require('../../Assets/UserLogged.png'),
+//       name: 'Nome do hospital 2',
+//       description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
+//       time: '24 min',
+//       distance: '3.5KM',
+//       favorite: true,
+//     },
+//     {
+//       image: require('../../Assets/UserLogged.png'),
+//       name: 'Nome do hospital 2',
+//       description: 'Descrição do hostipal e do que ele precisa. No caso a vaga',
+//       time: '24 min',
+//       distance: '3.5KM',
+//       favorite: false,
+//     },
+//   ],
+// };
 
 const Home = () => {
   const [tabSelected, setTabSelected] = useState(0);
+  const [tabViewData, setTabViewData] = useState({});
+  const usuarioDataStore = useSelector(store => store.UserReducer.login_data);
+
+  //TODO: Transformar para exibir mais de uma referencia!
+  const cardData = {
+    name: usuarioDataStore.response.user.dcLogin,
+    hospital: usuarioDataStore.response.user.hsptal.nmHsptal,
+    position: usuarioDataStore.response.user.hsptal.refrncia[0].nmRefrncia,
+  };
+  const options = ['Notificações', 'Favoritos'];
+
+  useEffect(() => {
+    API.get(
+      `solicitacao/enviadas?cdUsuario=${usuarioDataStore.response.user.cdUsuario}`,
+      {
+        headers: {
+          Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
+        },
+      },
+    )
+      .then(response => {
+        console.log(response.data.resultado);
+        setTabViewData(response.data.resultado);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -83,6 +108,7 @@ const Home = () => {
       </View>
       <View style={styles.viewTab}>
         <TabView
+          options={options}
           data={tabViewData}
           selected={tabSelected}
           onPress={setTabSelected}
@@ -118,7 +144,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   viewCardUser: {
-    flex: 0.5,
     marginTop: hp(3),
   },
   viewTab: {

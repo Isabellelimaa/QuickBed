@@ -5,30 +5,22 @@ import {LinearTextGradient} from 'react-native-text-gradient';
 import {useSelector} from 'react-redux';
 
 import {API} from '../../Configs/AxiosConfigs';
-import InputStyled from '../InputStyled';
 import Card from '../Card';
 
-const SolicitacaoDetalhes = props => {
-  const [value, setValue] = useState(null);
+const SolicitacaoDetalhes = ({data, handleChange}) => {
   const [hospitais, setHospitais] = useState([]);
   const usuarioDataStore = useSelector(store => store.UserReducer.login_data);
-
-  // const hospitais = [
-  //   {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
-  //   {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
-  //   {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
-  //   {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
-  //   {name: 'Nome do hospital', especialidade: 'Especialidade', qtdleitos: 2},
-  // ];
 
   const renderCard = () => {
     return hospitais.map((value, index) => {
       return (
         <Card
-          Key={index}
+          Key={value.cdHsptal}
           name={value.nmHsptal}
           especialidade={value.refrncia[0].nmRefrncia}
           qtd={value.qtLeito}
+          isSelected={data.cdHsptal == value.cdHsptal ? true : false}
+          onPress={() => handleChange('cdHsptal', value.cdHsptal)}
         />
       );
     });
@@ -41,7 +33,6 @@ const SolicitacaoDetalhes = props => {
       },
     })
       .then(response => {
-        console.log(response.data.resultado);
         setHospitais(response.data.resultado);
       })
       .catch(error => {
@@ -50,12 +41,6 @@ const SolicitacaoDetalhes = props => {
   }, [usuarioDataStore.response.accessToken]);
   return (
     <>
-      <InputStyled
-        label={'Buscar por Hospitais'}
-        onChangeText={() => console.log('teste')}
-        value={value}
-        type={'default'}
-      />
       <View style={styles.viewText}>
         <Text style={{fontWeight: 'bold', fontSize: 20}}>
           Hospitais de referência
@@ -76,12 +61,12 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     marginLeft: moderateScale(70, 0.6),
-    marginTop: moderateScale(10, 0.6),
     marginBottom: moderateScale(5, 0.6),
   },
   cardContainer: {
     height: moderateScale(850, 0.6),
     marginLeft: moderateScale(10, 0.6),
+    marginTop: moderateScale(15, 0.6),
     marginRight: moderateScale(10, 0.6),
   },
 });

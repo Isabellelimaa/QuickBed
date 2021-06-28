@@ -20,18 +20,19 @@ const ItemTabView = ({data}) => {
       </View>
       <View style={styles.viewRight}>
         <View style={styles.firstViewRight}>
-          <Text style={styles.textName}>{data.name}</Text>
+          <Text style={styles.textName}>{data.hsptal.nmHsptal}</Text>
           <Image
-            source={
-              data.favorite
-                ? require('../../Assets/BookMarkCheck.png')
-                : require('../../Assets/BookMark.png')
-            }
+            // source={
+            //   data.favorite
+            //     ? require('../../Assets/BookMarkCheck.png')
+            //     : require('../../Assets/BookMark.png')
+            // }
+            source={require('../../Assets/BookMark.png')}
             style={styles.imageBookmark}
           />
         </View>
         <View style={styles.secondViewRight}>
-          <Text style={styles.textDescription}>{data.description}</Text>
+          <Text style={styles.textDescription}>{data.dcMotivo}</Text>
         </View>
         <View style={styles.thirdViewRight}>
           <View style={styles.viewTime}>
@@ -41,13 +42,13 @@ const ItemTabView = ({data}) => {
               resizeMode={'center'}
             />
             <View style={styles.viewTextTime}>
-              <Text style={styles.textTime}>{data.time}</Text>
+              <Text style={styles.textTime}>{data.dataRegistro}</Text>
             </View>
           </View>
           <LinearTextGradient
             locations={[0, 1]}
             colors={['#00BCD4', '#3D0B83']}>
-            <Text style={styles.textDistance}>{data.distance}</Text>
+            <Text style={styles.textDistance}>{data.status.nmStatus}</Text>
           </LinearTextGradient>
         </View>
       </View>

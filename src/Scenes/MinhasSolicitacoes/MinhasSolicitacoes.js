@@ -27,12 +27,9 @@ const MinhasSolicitacoes = props => {
   };
 
   useEffect(() => {
-    console.log(usuarioDataStore.response.accessToken);
-
     if (props.navigation.state.routeName == '_notificacoes') {
       API.get(
-        // `solicitacao/enviadas?cdUsuario=${usuarioDataStore.response.user.cdUsuario}`,
-        'solicitacao/enviadas?cdUsuario=1',
+        `solicitacao/enviadas?cdUsuario=${usuarioDataStore.response.user.cdUsuario}`,
         {
           headers: {
             Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
@@ -48,8 +45,7 @@ const MinhasSolicitacoes = props => {
         });
     } else {
       API.get(
-        // `solicitacao/recebidas?cdHsptal=${usuarioDataStore.response}`,
-        'solicitacao/recebidas?cdHsptal=1',
+        `solicitacao/recebidas?cdHsptal=${usuarioDataStore.response.user.hsptal.cdHsptal}`,
         {
           headers: {
             Authorization: ` Bearer ${usuarioDataStore.response.accessToken}`,
@@ -64,7 +60,7 @@ const MinhasSolicitacoes = props => {
           console.log(error);
         });
     }
-  }, [usuarioDataStore.response.accessToken, label]);
+  }, []);
   return (
     <>
       <ImageBackground
